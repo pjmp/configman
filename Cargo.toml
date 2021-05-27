@@ -1,0 +1,12 @@
+[package]
+name = "dotty"
+version = "0.1.0"
+authors = ["pjmp"]
+edition = "2018"
+
+[dependencies]
+ignore = "0.4.17"
+structopt = "0.3.21"
+same-file = "1.0.6"
+tree_magic_mini = "1.0.1"
+dialoguer = "0.7.1"
