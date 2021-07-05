@@ -1,4 +1,4 @@
-# configman [![Crates.io](https://img.shields.io/crates/v/configman)](https://crates.io/crates/configman) ![License](https://img.shields.io/crates/l/configman)
+# configman [![Crates.io](https://img.shields.io/crates/v/configman?style=flat-square)](https://crates.io/crates/configman) ![License](https://img.shields.io/crates/l/configman?style=flat-square)
 
 > Heavily inspired by [stow](https://www.gnu.org/software/stow/).
 
