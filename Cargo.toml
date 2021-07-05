@@ -1,6 +1,6 @@
 [package]
 name = "configman"
-version = "0.3.0"
+version = "0.4.0"
 authors = ["pjmp"]
 edition = "2018"
 description = "Dead simple config manager"
@@ -16,3 +16,8 @@ clap = "3.0.0-beta.2"
 dialoguer = "0.8.0"
 log = "0.4.14"
 fmtlog = {version = "0.1.4", default-features = false, features = ["colored"]}
+
+[profile.release]
+lto = "fat"
+panic = "abort"
+codegen-units = 1
