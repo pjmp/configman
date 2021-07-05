@@ -15,32 +15,6 @@ pub struct Configman {
     #[clap(short, long, conflicts_with = "dry-run")]
     pub(crate) verbose: bool,
     #[clap(
-        long,
-        conflicts_with_all = &["remove"],
-        about = "Caution! This will turn files in source to symlinks. Run --help to read full description",
-        long_about = r"Caution! This will turn files in source to symlinks and may alter the contents of your destination directory.
-Any plain text files in the source that does not exist in destination will be moved to source and a symlink will be created in the destination.
-
-Example:
-$ tree src
-├── .foo
-
-$ tree target
-├──
-
-$ configman src=/path dest=/path --import
-
-$ tree src
-├── .foo (symlinked)
-
-$ tree target
-├── .foo
-
-
-"
-    )]
-    import: bool,
-    #[clap(
         short,
         long,
         conflicts_with = "dry-run",
@@ -73,7 +47,6 @@ $ tree target
     destination: Option<PathBuf>,
     #[clap(
         long,
-        conflicts_with_all = &["import"],
         about = "Unlink the symlinks in destination path linked from the source directory."
     )]
     remove: bool,
@@ -83,7 +56,6 @@ $ tree target
 enum Mode {
     DryRun,
     Remove,
-    Import,
     Normal,
 }
 
@@ -146,8 +118,6 @@ impl Configman {
     pub(crate) fn run(&self) -> Result<()> {
         let mode = if self.dry_run {
             Mode::DryRun
-        } else if self.import {
-            Mode::Import
         } else if self.remove {
             Mode::Remove
         } else {
@@ -155,7 +125,6 @@ impl Configman {
         };
 
         match mode {
-            // Add dry-run for import, remove etc
             Mode::DryRun => {
                 if !log::log_enabled!(log::Level::Info) {
                     utils::enable_log()?;
@@ -197,25 +166,6 @@ impl Configman {
                                 Ok(())
                             })?;
                         }
-                    }
-
-                    Ok(())
-                })?;
-            }
-            Mode::Import => {
-                self.dir_walk(|src, target| {
-                    if !target.exists() {
-                        if src.is_dir() {
-                            self.create_dir(&target)?;
-                        }
-
-                        if src.is_file() {
-                            fs::copy(&src, &target)?;
-                            fs::remove_file(&src)?;
-                            self.create_file(&target, &src)?;
-                        }
-                    } else {
-                        log::warn!("{} exist.", &target.display());
                     }
 
                     Ok(())
