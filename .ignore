@@ -1,0 +1,5 @@
+# *.md
+.git
+*.md
+.ignore
+.gitignore
