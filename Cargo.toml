@@ -8,7 +8,7 @@ categories = ["command-line-utilities"]
 license = "MIT OR Apache-2.0"
 readme = "README.md"
 repository = "https://github.com/pjmp/configman"
-keywords = ["dotfiles", "config manager", "symlink", "configman"]
+keywords = ["dotfiles", "config", "symlink", "configman"]
 
 [dependencies]
 ignore = "0.4.18"
