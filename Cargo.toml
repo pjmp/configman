@@ -1,6 +1,6 @@
 [package]
 name = "configman"
-version = "0.4.0"
+version = "0.4.1"
 authors = ["pjmp"]
 edition = "2018"
 description = "Dead simple config manager"
