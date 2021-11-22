@@ -1,4 +1,4 @@
-use clap::Clap;
+use clap::Parser;
 use ignore::WalkBuilder;
 
 use std::{
@@ -9,7 +9,7 @@ use std::{
 
 use crate::{utils, Result};
 
-#[derive(Debug, Clap)]
+#[derive(Debug, Parser)]
 #[clap(setting = clap::AppSettings::ArgRequiredElseHelp, about, version)]
 pub struct Configman {
     #[clap(short, long, conflicts_with = "dry-run")]
